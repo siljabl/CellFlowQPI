@@ -1,0 +1,8 @@
+Units
+lenght: pixels
+time: frames
+
+d_cell:40
+u_max:10.0
+dt:0.1
+pad_width:0
