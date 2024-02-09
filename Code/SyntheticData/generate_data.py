@@ -9,9 +9,9 @@ import plot_functions as plot
 import save_functions as save
 
 # Folders
-file    = "Well1-1_resc_reg2"
-in_folder  = "../Data/InitialConditions/"
-out_folder = "../Data/Synthetic/Field4/"
+file    = "Well1-1_resc_reg900"
+in_folder  = "../../Data/InitialConditions/"
+out_folder = "../../Data/Synthetic/Test/"
 
 # Creating data folder
 if os.path.isdir(out_folder) == 0:
@@ -42,7 +42,7 @@ y   = size[1] * np.linspace(-.5, .5, size[1]) / d_cell
 X,Y = np.meshgrid(x,y)
 
 # Define velocity field
-velocity = field_4(X,Y)
+velocity = 0.2*field_3(X,Y) + field_exp(x,y, d_cell)
 velocity = normalize(*velocity, u_max)
 
 idx, region = sub_region(f, x, y)

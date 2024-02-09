@@ -1,46 +1,19 @@
 import numpy as np
 from scipy.stats import norm
+from scipy.interpolate import interp2d
 
 # infinitesimal value to avoid overflow
 eps    = 1e-8
    
 
-def circular(X, Y, shift=[0,0], scale=[1,1]):
-    x = X + shift[0]
-    y = Y + shift[1]
-
-    u = -y * scale[0]
-    v =  x * scale[1]
-
-    return np.array([u,v])
-
-
-def hyperbolic(X, Y, shift=[0,0], scale=[1,1]):
-    x = X + shift[0]
-    y = Y + shift[1]
-
-    u = y * scale[0]
-    v = x * scale[1]
-
-    return np.array([u,v])
-
-
-def divergent(X, Y, shift=[0,0], scale=[1,1]):
-    x = X + shift[0]
-    y = Y + shift[1]
-
-    u = x * scale[0]
-    v = y * scale[1]
-
-    return np.array([u,v])
-
-
 def cell_expansion(X, Y, loc=[0,0]):
+    x = X + loc[0]
+    y = Y + loc[1]
     loc = np.array(loc)
     scale = 2
     cell = norm.pdf(Y, loc=loc[1], scale=scale) * norm.pdf(X, loc=loc[0], scale=scale)
-    u = cell * divergent(X,Y,shift=-loc)[0]
-    v = cell * divergent(X,Y,shift=-loc)[1]
+    u = cell * x
+    v = cell * y
 
     return np.array([u,v])
 
@@ -65,6 +38,7 @@ def field_3(X, Y):
 
     return np.array([u,v])
 
+
 def field_4(X,Y):
     velocity =  cell_expansion(X,Y,loc=[-1.8, 2]) +\
                 cell_expansion(X,Y,loc=[1, -2.8]) +\
@@ -76,6 +50,21 @@ def field_4(X,Y):
                 0.01*np.array([np.ones_like(X), 0*X])
     
     return velocity
+
+
+def field_exp(x, y, d_cell):
+    up = np.loadtxt('../../Data/InitialConditions/x_velocity.txt')
+    vp = np.loadtxt('../../Data/InitialConditions/y_velocity.txt').T
+
+    size = np.shape(up)
+
+    xp  = len(x) * np.linspace(-.5, .5, size[0]) / d_cell
+    yp  = len(y) * np.linspace(-.5, .5, size[1]) / d_cell
+
+    u = interp2d(xp, yp, up)
+    v = interp2d(xp, yp, vp)
+
+    return np.array([u(x,y), v(x,y)])
 
 
 def noise(X, sigma=1):
