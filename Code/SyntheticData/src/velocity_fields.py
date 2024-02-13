@@ -52,9 +52,9 @@ def field_4(X,Y):
     return velocity
 
 
-def field_exp(x, y, d_cell):
-    up = np.loadtxt('../../Data/InitialConditions/x_velocity.txt')
-    vp = np.loadtxt('../../Data/InitialConditions/y_velocity.txt').T
+def field_exp(x, y, d_cell, file):
+    up = np.loadtxt('../../Data/InitialConditions/x_velocity_' + file)
+    vp = np.loadtxt('../../Data/InitialConditions/y_velocity_' + file).T
 
     size = np.shape(up)
 

@@ -2,5 +2,6 @@
 image_analysis.py
 Data/RescaledRegistered
 Data/RescaledRegisteredSmoothed
+Data/Synthetic/Test
 images
 
