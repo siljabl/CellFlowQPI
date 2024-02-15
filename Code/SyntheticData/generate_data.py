@@ -2,54 +2,47 @@ import os
 import sys
 import numpy as np
 
-sys.path.append('src')
+sys.path.append("src")
 from functions import *
-from velocity_fields import *
+from velocity_fields import normalize
+import integration
 import plot_functions as plot
 import save_functions as save
 
 # Folders
-file    = "Well1-1_resc_reg900"
-v_file  = "testED.txt"
-in_folder  = "../../Data/InitialConditions/"
-out_folder = "../../Data/Synthetic/Test/"
+im_file   = sys.argv[1]
+field_dir = sys.argv[2]
 
 # Creating data folder
-if os.path.isdir(out_folder) == 0:
-    os.mkdir(out_folder)
-    os.mkdir(out_folder + "tif")
-
+tif_dir = field_dir + "tif/"
+if os.path.isdir(tif_dir) == 0:
+    os.mkdir(tif_dir)
 
 # Experimental parameters
+# Make these user inputs?
 d_cell = 40             # approximate cell diameter in pixels
 u_max  = d_cell / 4     # max displacement in pixels per frame
 
 
+''' IMPORT IMAGE DATA AND VELOCITY FIELD '''
 # Import initial conditions
-init_cond = np.load(in_folder + file + ".npy")
-f = 0.1                 # Defining subset
-
+# read tif directly?
 # Padd to ensure initial conditions are well behaved
-pad_width = 0
+f = 1/4                 # Defining subset. change so remove to new exponent of 2
+pad_width = 10
+init_cond = np.load(im_file)
 init_cond = np.pad(init_cond, mode='linear_ramp', end_values=0, pad_width=pad_width)
 
+# Import velocity field and normalize to u_max
+u, v = np.loadtxt(field_dir + "x_velocity_full.txt"), np.loadtxt(field_dir + "y_velocity_full.txt")
+u, v = normalize(*[u,v], u_max)
 
+# Ensure intensity data and velocity field have same size.
+intensity, velocity = size(init_cond, np.array([u, v]))
+idx, region = sub_region(f, intensity)
 
-''' VELOCITY FIELD '''
-# Meshgrid
-size = np.shape(init_cond)
-x   = size[0] * np.linspace(-.5, .5, size[0]) / d_cell
-y   = size[1] * np.linspace(-.5, .5, size[1]) / d_cell
-X,Y = np.meshgrid(x,y)
-
-# Define velocity field
-velocity = 0.2*field_3(X,Y) + field_exp(x,y, d_cell, v_file)
-velocity = normalize(*velocity, u_max)
-
-idx, region = sub_region(f, x, y)
-plot.velocity_field(velocity, X, Y, init_cond, region, out_folder)
-save.velocity_field(velocity, idx, out_folder)
-
+plot.velocity_field(velocity, intensity, region, field_dir)
+save.velocity_field(velocity, idx, tif_dir)
 
 
 ''' GENERATE DATA '''
@@ -58,18 +51,21 @@ dt      = 0.1  # in frames
 t_max   = 2    # in frames
 t_steps = int(t_max / dt)
 
-intensity = RK_integration(init_cond, velocity, t_steps=t_steps, dt=dt)
-plot.intensity(intensity, X, t_max, t_steps, region, out_folder, file)
-save.intensity(intensity, idx, t_max, t_steps, out_folder, file)
-plot.mass_conservation(intensity, idx, dt, out_folder)
-
+intensity = integration.RK(intensity, velocity, t_steps=t_steps, dt=dt)
+save.intensity(intensity, idx, t_max, t_steps, tif_dir, im_file)
+plot.mass_conservation(intensity, idx, dt, field_dir)
 
 
 # SAVE PARAMETERS
-config = {"initial condition": file,
-          "d_cell": d_cell, 
-          "u_max": u_max, 
-          "dt": dt,
-          "pad_width": pad_width}
+im_size  = np.shape(init_cond)
+tif_size = (int(im_size[0] * (1 - 2*f)), int(im_size[1] * (1 - 2*f)))
 
-save.config(config, out_folder)
+config = {"im_file"         : im_file,
+          "full resolution" : im_size,
+          "tif resolution"  : tif_size,
+          "pad_width"       : pad_width,
+          "d_cell"          : d_cell, 
+          "u_max"           : u_max, 
+          "dt"              : dt}
+
+save.config(config, field_dir)

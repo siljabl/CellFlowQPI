@@ -2,30 +2,31 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def velocity_field(velocity, X, Y, init_cond, region, folder):
+def velocity_field(velocity, init_cond, region, folder):
+    size  = np.shape(init_cond)
     I_min = np.min(init_cond)
     I_max = np.max(init_cond)
 
     u_norm = np.sqrt(velocity[0]**2 + velocity[1]**2)
-    u_min = np.min(u_norm)
-    u_max = np.max(u_norm)
+    u_min  = np.min(u_norm)
+    u_max  = np.max(u_norm)
+    u_flip = np.flip(velocity, axis=1)
 
-    fig, ax = plt.subplots(1,1, figsize=(20,20))
-    ax.set(xlim=(X[0,0], X[0,-1]),
-           ylim=(X[-1,0], X[-1,-1]),
-           xlabel=r'$x ~/~ d_{cell}$', 
-           ylabel=r'$y ~/~ d_{cell}$', 
+    x   = np.arange(size[0])
+    y   = np.arange(size[1])
+    X,Y = np.meshgrid(x,y)
+
+    fig, ax = plt.subplots(1,1, figsize=(6,5))
+    ax.set(xlabel=r'$x ~[pixels]$', 
+           ylabel=r'$y ~[pixels]$', 
            title=r'Velocity field, $|\bar{u}(x,y)|\in$' + f' [{u_min:0.0f}, {u_max:0.0f}]')
     
-    #ss = int(np.ceil(len(X) / 128))
-    #ax.quiver(X[0:-1:ss, 0:-1:ss], Y[0:-1:ss, 0:-1:ss], velocity[0, 0:-1:ss, 0:-1:ss], velocity[1,0:-1:ss, 0:-1:ss], width=0.0015, color='firebrick')
-    ax.streamplot(X, Y, *velocity, density=4, linewidth=1, color='firebrick')
+    ax.streamplot(X, Y, *u_flip, density=2, linewidth=1, color='firebrick')
     ax.plot(region[0],  region[1], alpha=1,   ls="dashed", color="k", lw=3)
-    im=ax.imshow(init_cond, origin="lower", extent=[X[0,0], X[0,-1], X[-1,0], X[-1,-1]], 
-                 vmin=I_min, vmax=I_max, cmap="Greys_r", alpha=0.65)
+    im=ax.imshow(init_cond, vmin=I_min, vmax=I_max, cmap="Greys_r", alpha=0.65)
     
     fig.colorbar(im)
-    fig.savefig(folder + "velocity_field.png")
+    fig.savefig(folder + "plots/velocity_field.png")
 
 
 
@@ -55,17 +56,17 @@ def intensity(intensity, X, t_max, t_steps, region, folder, file):
 def mass_conservation(intensity, idx, dt, folder):
     xlim, ylim = idx
 
-    total_mean  = [np.mean(I) for I in intensity]
-    region_mean = [np.mean(I[xlim[0]:xlim[1], ylim[0]:ylim[1]]) for I in intensity]
+    total_mean = [np.mean(I) for I in intensity]
+    tif_mean   = [np.mean(I[xlim[0]:xlim[1], ylim[0]:ylim[1]]) for I in intensity]
     time = [i * dt for i in range(len(total_mean))]
 
     fig, ax = plt.subplots(1,1)
     ax.plot(time, total_mean  / total_mean[0],  '.', label=r"$\langle I \rangle_{total}$")
-    ax.plot(time, region_mean / region_mean[0], '.', label=r"$\langle I \rangle_{subset}$")
+    ax.plot(time, tif_mean / tif_mean[0], '.', label=r"$\langle I \rangle_{tif}$")
     ax.set(xlabel="Frame", ylabel="I(t) / I(0)")
     ax.legend()
     
     fig.tight_layout()
-    fig.savefig(folder + "mean_intensity.png")
+    fig.savefig(folder + "plots/mean_intensity.png")
 
     return fig

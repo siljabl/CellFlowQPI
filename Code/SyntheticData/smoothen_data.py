@@ -20,5 +20,4 @@ for i in range(900, 901):
     #np.save(out_file, smoothed_data[xlim[0]:xlim[1], ylim[0]:ylim[1]])
     np.save(out_file, smoothed_data)
 
-    # plt.imsave() for tiff
-    #data.save(out_file)
+

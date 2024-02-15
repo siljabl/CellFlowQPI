@@ -56,9 +56,9 @@ int main(int argc, char** argv) {
 //	Parameter setting
 // ***********************************************
 
-	double epsinit = 0.0;
+	double epsinit  = 0.0;
 	double epsfinal = 0.0;
-	double epsdiff = 0.0;
+	double epsdiff  = 0.0;
 		
 	int seed1 = atoi(argv[1]);
 	int nosteps = atoi(argv[2]);

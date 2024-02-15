@@ -39,19 +39,6 @@ def field_3(X, Y):
     return np.array([u,v])
 
 
-def field_4(X,Y):
-    velocity =  cell_expansion(X,Y,loc=[-1.8, 2]) +\
-                cell_expansion(X,Y,loc=[1, -2.8]) +\
-                cell_expansion(X,Y,loc=[0.2, -5]) +\
-                cell_expansion(X,Y,loc=[2, 0])    +\
-                -cell_expansion(X,Y,loc=[-2, -6]) +\
-                -cell_expansion(X,Y,loc=[-.5, 1]) +\
-                -cell_expansion(X,Y,loc=[-2.2, 0.1]) +\
-                0.01*np.array([np.ones_like(X), 0*X])
-    
-    return velocity
-
-
 def field_exp(x, y, d_cell, file):
     up = np.loadtxt('../../Data/InitialConditions/x_velocity_' + file)
     vp = np.loadtxt('../../Data/InitialConditions/y_velocity_' + file).T
@@ -65,6 +52,19 @@ def field_exp(x, y, d_cell, file):
     v = interp2d(xp, yp, vp)
 
     return np.array([u(x,y), v(x,y)])
+
+
+def field_5(X,Y):
+    velocity =  cell_expansion(X,Y,loc=[-1.8, 2]) +\
+                cell_expansion(X,Y,loc=[1, -2.8]) +\
+                cell_expansion(X,Y,loc=[0.2, -5]) +\
+                cell_expansion(X,Y,loc=[2, 0])    +\
+                -cell_expansion(X,Y,loc=[-2, -6]) +\
+                -cell_expansion(X,Y,loc=[-.5, 1]) +\
+                -cell_expansion(X,Y,loc=[-2.2, 0.1]) +\
+                0.01*np.array([np.ones_like(X), 0*X])
+    
+    return velocity
 
 
 def noise(X, sigma=1):
