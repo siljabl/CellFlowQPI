@@ -16,7 +16,7 @@ def im_velocity(velocity, dir):
                   #xlabel=r'$x ~[pixels]$', \
                   #ylabel=r'$y ~[pixels]$')
         
-        ax[i].imshow(velocity[i], vmin=u_min, vmax=u_max)
+        ax[i].imshow(velocity[i])#, vmin=u_min, vmax=u_max)
         
     fig.tight_layout()
     fig.savefig(dir + "/plots/xy_velocity.png")

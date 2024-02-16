@@ -7,7 +7,7 @@ def config(config, dir):
     config: dict of parameters
     dir: where config is saved
     '''
-    with open(dir + "config.txt", 'w') as f: 
+    with open(dir + "/config.txt", 'w') as f: 
         f.write('Units\nlenght:pixels\ntime:frames\n\n') 
 
         for key, value in config.items():  

@@ -25,7 +25,7 @@ y   = np.linspace(-.5, .5, size[1]+1)
 X,Y = np.meshgrid(x,y)
 
 # Define velocity field
-velocity = field_3(X, Y)
+velocity = field_2(X, Y)
 velocity = normalize(*velocity, 1)
 
 save.velocity_field(velocity, field_dir)

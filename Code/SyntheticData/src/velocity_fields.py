@@ -26,8 +26,8 @@ def field_1(X, Y):
 
 
 def field_2(X, Y):
-    u = 2*(Y+1)**2 + 10*Y*np.sin(X)
-    v = X*(X+2) + Y**3 - 6 + X + 10*Y*np.cos(X)
+    u = 2*(Y+1)**2 + 10*Y*np.sin(5*X)
+    v = X*(X+2) + Y**3 - 6 + X + 10*Y*np.cos(X+10*Y)
 
     return np.array([u,v])
 
