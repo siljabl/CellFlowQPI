@@ -19,7 +19,6 @@ if os.path.isdir(tif_dir) == 0:
     os.mkdir(tif_dir)
 
 # Experimental parameters
-# Make these user inputs?
 d_cell = 40             # approximate cell diameter in pixels
 u_max  = d_cell / 4     # max displacement in pixels per frame
 
@@ -42,7 +41,7 @@ intensity, velocity = size(init_cond, np.array([u, v]))
 idx, region = sub_region(f, intensity)
 
 plot.velocity_field(velocity, intensity, region, field_dir)
-save.velocity_field(velocity, idx, tif_dir)
+save.velocity_field(velocity, tif_dir, idx)
 
 
 ''' GENERATE DATA '''

@@ -33,8 +33,8 @@ def field_2(X, Y):
 
 
 def field_3(X, Y):
-    u = np.sin(2*X + 3) + (Y-1)*np.cos(Y) + Y
-    v = np.sin(Y-0.4) - np.cos(Y-X) + X
+    u = np.sin(20*X + 3) + (10*Y-1)*np.cos(10*Y) + 10*Y
+    v = np.sin(10*Y-0.4) - np.cos(10*Y-10*X) + 10*X
 
     return np.array([u,v])
 

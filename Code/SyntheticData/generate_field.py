@@ -10,24 +10,24 @@ import save_functions as save
 
 # Folders
 v_file  = "testED.txt"
-in_folder  = "../../Data/InitialConditions/"
-out_folder = "../../Data/Synthetic/Test/"
+field_dir = sys.argv[1]
 
 # Creating data folder
-if os.path.isdir(out_folder) == 0:
-    os.mkdir(out_folder)
-    os.mkdir(out_folder + "plots")
+if os.path.isdir(field_dir) == 0:
+    os.mkdir(field_dir)
+    os.mkdir(field_dir + "plots")
+
 
 ''' VELOCITY FIELD '''
 # Meshgrid
 size = [1024, 1024]
-x   = size[0] * np.linspace(-.5, .5, size[0])
-y   = size[1] * np.linspace(-.5, .5, size[1])
+x   = np.linspace(-.5, .5, size[0])
+y   = np.linspace(-.5, .5, size[1])
 X,Y = np.meshgrid(x,y)
 
 # Define velocity field
-velocity = 0.2*field_3(X,Y) + field_exp(x,y, 10, v_file)
+velocity = field_3(X, Y)
 velocity = normalize(*velocity, 1)
 
-idx, region = sub_region(f, x, y)
-save.velocity_field(velocity, idx, out_folder)
+save.velocity_field(velocity, field_dir)
+plot.im_velocity(velocity, field_dir)

@@ -8,7 +8,13 @@ def size(im, u):
 
     size = [min(im_size[i], u_size[i]) for i in range(dim)]
 
-    im_update = im[0:size[0], 0:size[1]]
+    im_i = [int((im_size[i] - size[i]) / 2) for i in range(dim)]
+    im_f = [size[i] - im_i[i] for i in range(dim)]
+
+    u_i = [int((u_size[i] - size[i]) / 2) for i in range(dim)]
+    u_f = [size[i] - u_i[i] for i in range(dim)]
+
+    im_update = im[im_i[0]:im_f[0], im_i[1]:im_f[1]]
     u_update  =  u[:, 0:size[0], 0:size[1]]
 
     return im_update, u_update

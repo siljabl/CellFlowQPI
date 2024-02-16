@@ -15,7 +15,7 @@ def config(config, dir):
 
 
 
-def velocity_field(velocity, idx, tif_dir):
+def velocity_field(velocity, dir, idx=[[0,-1], [0,-1]]):
     '''
     Saving velocity field as txt
     velocity: x and y components of velocity field
@@ -25,9 +25,14 @@ def velocity_field(velocity, idx, tif_dir):
     xlim, ylim = idx
     u = velocity[0, xlim[0]:xlim[1], ylim[0]:ylim[1]]
     v = velocity[1, xlim[0]:xlim[1], ylim[0]:ylim[1]]
-   
-    np.savetxt(tif_dir + "x_velocity_tif.txt", u)
-    np.savetxt(tif_dir + "y_velocity_tif.txt", v)
+    
+    if idx == [[0,-1], [0,-1]]:
+        np.savetxt(dir + "x_velocity_full.txt", u)
+        np.savetxt(dir + "y_velocity_full.txt", v)
+
+    else:
+        np.savetxt(dir + "x_velocity_tif.txt", u)
+        np.savetxt(dir + "y_velocity_tif.txt", v)
 
 
 

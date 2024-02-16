@@ -2,7 +2,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def velocity_field(velocity, init_cond, region, folder):
+def im_velocity(velocity, dir):
+    dim = len(velocity)
+    u_norm = np.sqrt(velocity[0]**2 + velocity[1]**2)
+    u_min  = np.min(u_norm)
+    u_max  = np.max(u_norm)
+
+    title = ['x', 'y', 'z']
+
+    fig, ax = plt.subplots(1,2, figsize=(4*dim,5), sharey=True)
+    for i in range(dim):
+        ax[i].set(title=title[i] + '-component')
+                  #xlabel=r'$x ~[pixels]$', \
+                  #ylabel=r'$y ~[pixels]$')
+        
+        ax[i].imshow(velocity[i], vmin=u_min, vmax=u_max)
+        
+    fig.tight_layout()
+    fig.savefig(dir + "plots/xy_velocity.png")
+
+
+
+def velocity_field(velocity, init_cond, region, dir):
     size  = np.shape(init_cond)
     I_min = np.min(init_cond)
     I_max = np.max(init_cond)
@@ -17,8 +38,8 @@ def velocity_field(velocity, init_cond, region, folder):
     X,Y = np.meshgrid(x,y)
 
     fig, ax = plt.subplots(1,1, figsize=(6,5))
-    ax.set(xlabel=r'$x ~[pixels]$', 
-           ylabel=r'$y ~[pixels]$', 
+    ax.set(xlabel=r'$x ~[pixels]$', \
+           ylabel=r'$y ~[pixels]$', \
            title=r'Velocity field, $|\bar{u}(x,y)|\in$' + f' [{u_min:0.0f}, {u_max:0.0f}]')
     
     ax.streamplot(X, Y, *u_flip, density=2, linewidth=1, color='firebrick')
@@ -26,11 +47,11 @@ def velocity_field(velocity, init_cond, region, folder):
     im=ax.imshow(init_cond, vmin=I_min, vmax=I_max, cmap="Greys_r", alpha=0.65)
     
     fig.colorbar(im)
-    fig.savefig(folder + "plots/velocity_field.png")
+    fig.savefig(dir + "plots/velocity_field.png")
 
 
 
-def intensity(intensity, X, t_max, t_steps, region, folder, file):
+def intensity(intensity, X, t_max, t_steps, region, dir, file):
     I_min = np.min(intensity[0])
     I_max = np.max(intensity[0])
 
@@ -39,8 +60,8 @@ def intensity(intensity, X, t_max, t_steps, region, folder, file):
 
         # Plot and save as png
         fig, ax = plt.subplots(1, 1)
-        ax.set(title=f"Frame: {frame:0.0f}", 
-               xlabel=r'$x ~/~ d_{cell}$',
+        ax.set(title=f"Frame: {frame:0.0f}", \
+               xlabel=r'$x ~/~ d_{cell}$', \
                ylabel=r'$y ~/~ d_{cell}$')
         im=ax.imshow(intensity[i], extent=[X[0,0], X[0,-1], X[-1,0], X[-1,-1]], 
                      origin="upper", vmin=I_min, vmax=I_max)
@@ -49,11 +70,11 @@ def intensity(intensity, X, t_max, t_steps, region, folder, file):
         ax.plot(region[0], region[1], lw=3, color="k", alpha=1, ls="dashed")
         
         fig.colorbar(im)
-        fig.savefig(folder + file + f"_%00i.png" % (frame), format = "png")
+        fig.savefig(dir + file + f"_%00i.png" % (frame), format = "png")
 
 
 
-def mass_conservation(intensity, idx, dt, folder):
+def mass_conservation(intensity, idx, dt, dir):
     xlim, ylim = idx
 
     total_mean = [np.mean(I) for I in intensity]
@@ -67,6 +88,6 @@ def mass_conservation(intensity, idx, dt, folder):
     ax.legend()
     
     fig.tight_layout()
-    fig.savefig(folder + "plots/mean_intensity.png")
+    fig.savefig(dir + "plots/mean_intensity.png")
 
     return fig
