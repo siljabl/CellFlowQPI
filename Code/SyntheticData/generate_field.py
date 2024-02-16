@@ -3,13 +3,12 @@ import sys
 import numpy as np
 
 sys.path.append('src')
-from functions import *
 from velocity_fields import *
 import plot_functions as plot
 import save_functions as save
 
 # Folders
-v_file  = "testED.txt"
+v_file  = "testED.txt"  # change this
 field_dir = sys.argv[1]
 
 # Creating data folder
