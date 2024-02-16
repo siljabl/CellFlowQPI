@@ -3,16 +3,15 @@ import matplotlib.pyplot as plt
 
 
 def im_velocity(velocity, dir):
-    dim = len(velocity)
     u_norm = np.sqrt(velocity[0]**2 + velocity[1]**2)
     u_min  = np.min(u_norm)
     u_max  = np.max(u_norm)
 
-    title = ['x', 'y', 'z']
+    title = [r'$u_x$', r'$u_y$']
 
-    fig, ax = plt.subplots(1,2, figsize=(4*dim,5), sharey=True)
-    for i in range(dim):
-        ax[i].set(title=title[i] + '-component')
+    fig, ax = plt.subplots(1,2, figsize=(8,5), sharey=True)
+    for i in range(2):
+        ax[i].set(title=title[i])
                   #xlabel=r'$x ~[pixels]$', \
                   #ylabel=r'$y ~[pixels]$')
         

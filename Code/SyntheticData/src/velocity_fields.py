@@ -2,9 +2,26 @@ import numpy as np
 from scipy.stats import norm
 from scipy.interpolate import interp2d
 
-# infinitesimal value to avoid overflow
-eps    = 1e-8
+# experimental velocity fields
+v_file  = "testED.txt"
+eps = 1e-10
    
+
+def field_from_file(X, Y, file):
+    x, y = X[0], Y[:,0]
+
+    up = np.loadtxt('../../Data/InitialConditions/x_velocity_' + file)
+    vp = np.loadtxt('../../Data/InitialConditions/y_velocity_' + file)
+
+    size = np.shape(up)
+    xp  = np.linspace(-1, 1, size[0])
+    yp  = np.linspace(-1, 1, size[1])
+
+    u = interp2d(xp, yp, up)
+    v = interp2d(xp, yp, vp)
+
+    return np.array([u(x,y), v(x,y)], dtype=np.float64)
+
 
 def cell_expansion(X, Y, loc=[0,0]):
     x = X + loc[0]
@@ -19,8 +36,10 @@ def cell_expansion(X, Y, loc=[0,0]):
 
 
 def field_1(X, Y):
-    u = X**2 - 2*(Y+1)**2 - (X-1)
-    v = (X + Y) - 1
+    u_exp, v_exp = field_from_file(X, Y, v_file)
+
+    u = (0.5*v_exp + np.cos(10*Y)*(X + .3)**2 - (Y + .2)/2 + Y*np.exp(X**2))
+    v = (0.5*u_exp + (X +.7) + Y) + np.sin(8*X - 2*Y)*np.sign(X)
     
     return np.array([u,v], dtype=np.float64)
 
@@ -39,29 +58,24 @@ def field_3(X, Y):
     return np.array([u,v], dtype=np.float64)
 
 
-def field_exp(x, y, d_cell, file):
-    up = np.loadtxt('../../Data/InitialConditions/x_velocity_' + file)
-    vp = np.loadtxt('../../Data/InitialConditions/y_velocity_' + file).T
+def field_4(X, Y):
+    u_exp, v_exp = 0, 0 #field_from_file(X, Y, v_file)
 
-    size = np.shape(up)
+    u = u_exp.T + 0.1*(2*(Y+1)**2 + 10*Y*np.sin(5*X)).T
+    v = v_exp + ((X + Y*(X+0.2)) - 1)
 
-    xp  = len(x) * np.linspace(-.5, .5, size[0]) / d_cell
-    yp  = len(y) * np.linspace(-.5, .5, size[1]) / d_cell
+    return np.array([u,v], dtype=np.float64)
 
-    u = interp2d(xp, yp, up)
-    v = interp2d(xp, yp, vp)
-
-    return np.array([u(x,y), v(x,y)], dtype=np.float64)
 
 
 def field_5(X,Y):
-    velocity =  cell_expansion(X,Y,loc=[-1.8, 2]) +\
-                cell_expansion(X,Y,loc=[1, -2.8]) +\
-                cell_expansion(X,Y,loc=[0.2, -5]) +\
-                cell_expansion(X,Y,loc=[2, 0])    +\
-                -cell_expansion(X,Y,loc=[-2, -6]) +\
-                -cell_expansion(X,Y,loc=[-.5, 1]) +\
-                -cell_expansion(X,Y,loc=[-2.2, 0.1]) +\
+    velocity =  cell_expansion(X,Y,loc=[-.18, .2]) +\
+                cell_expansion(X,Y,loc=[.1, -.28]) +\
+                cell_expansion(X,Y,loc=[0.2, -.5]) +\
+                cell_expansion(X,Y,loc=[.2, 0])    +\
+                -cell_expansion(X,Y,loc=[-.2, -.6]) +\
+                -cell_expansion(X,Y,loc=[-.5, .1]) +\
+                -cell_expansion(X,Y,loc=[-.22, 0.1]) +\
                 0.01*np.array([np.ones_like(X), 0*X])
     
     return velocity

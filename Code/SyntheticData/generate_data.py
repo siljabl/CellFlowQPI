@@ -13,6 +13,7 @@ import save_functions as save
 # Folders
 im_file   = sys.argv[1]
 field_dir = sys.argv[2]
+frames    = sys.argv[3]
 
 # Creating data folder
 tif_dir = field_dir + "/tif/"
@@ -49,7 +50,7 @@ save.velocity_field(velocity, tif_dir, idx)
 ''' GENERATE DATA '''
 # set time parameters
 dt      = 0.05  # in frames
-t_max   = 6    # in frames
+t_max   = int(frames)    # in frames
 t_steps = int(t_max / dt)
 
 intensity = integration.RK(intensity, velocity, t_steps=t_steps, dt=dt)
