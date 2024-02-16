@@ -45,40 +45,11 @@ def field_1(X, Y):
 
 
 def field_2(X, Y):
-    u = 2*(Y+1)**2 + 10*Y*np.sin(5*X)
-    v = X*(X+2) + Y**3 - 6 + X + 10*Y*np.cos(X+10*Y)
-
-    return np.array([u,v], dtype=np.float64)
-
-
-def field_3(X, Y):
     u = np.sin(20*X + 3) + (10*Y-1)*np.cos(10*Y) + 10*Y
     v = np.sin(10*Y-0.4) - np.cos(10*Y-10*X) + 10*X
 
     return np.array([u,v], dtype=np.float64)
 
-
-def field_4(X, Y):
-    u_exp, v_exp = 0, 0 #field_from_file(X, Y, v_file)
-
-    u = u_exp.T + 0.1*(2*(Y+1)**2 + 10*Y*np.sin(5*X)).T
-    v = v_exp + ((X + Y*(X+0.2)) - 1)
-
-    return np.array([u,v], dtype=np.float64)
-
-
-
-def field_5(X,Y):
-    velocity =  cell_expansion(X,Y,loc=[-.18, .2]) +\
-                cell_expansion(X,Y,loc=[.1, -.28]) +\
-                cell_expansion(X,Y,loc=[0.2, -.5]) +\
-                cell_expansion(X,Y,loc=[.2, 0])    +\
-                -cell_expansion(X,Y,loc=[-.2, -.6]) +\
-                -cell_expansion(X,Y,loc=[-.5, .1]) +\
-                -cell_expansion(X,Y,loc=[-.22, 0.1]) +\
-                0.01*np.array([np.ones_like(X), 0*X])
-    
-    return velocity
 
 
 def noise(X, sigma=1):
