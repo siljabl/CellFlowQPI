@@ -2,7 +2,7 @@
 image_analysis.py
 Data/RescaledRegistered
 Data/RescaledRegisteredSmoothed
-Data/Synthetic/Test
+Data/SyntheticTestData/Test
 images
 .vscode
 
