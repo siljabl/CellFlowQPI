@@ -1,6 +1,7 @@
 import os
 import sys
 import numpy as np
+import matplotlib.pyplot as plt
 
 sys.path.append("src")
 from functions import *
@@ -28,8 +29,8 @@ u_max  = d_cell / 4     # max displacement in pixels per frame
 # read tif directly?
 # Padd to ensure initial conditions are well behaved
 f = 100
-pad_width = 40
-init_cond = np.load(im_file)
+pad_width = 100
+init_cond = plt.imread(im_file)
 init_cond = np.pad(init_cond, mode='linear_ramp', end_values=0, pad_width=pad_width)
 
 

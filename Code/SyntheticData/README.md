@@ -1,9 +1,12 @@
-First run generate_field.py to generate a veolcity field and create a folder
+## Code to generate synthetic test data for the continuity metropolis algorithm
+
+### Generate a velocity field
+Run 'generate_field.py {directory}' to generate a velocity field. This also creates a new folder for the velocity field unless it already exists.
+
+### Generate frames
+Run 'generate_data.py {input image} {directory containing velocity field}' to generate cell layers moving according to a given velocity field. Input image should be a .tif and will be used as initial condition of the cell layer.
 
 
-Then run generate_data.py "image data" "velocity field" to produce tif files
-
-
-TO DO:
+### TO DO:
 - make possible to run outside this directory
-- read .tif directly?
+- create virtual environment

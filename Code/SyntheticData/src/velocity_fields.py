@@ -15,28 +15,28 @@ def cell_expansion(X, Y, loc=[0,0]):
     u = cell * x
     v = cell * y
 
-    return np.array([u,v])
+    return np.array([u,v], dtype=np.float64)
 
 
 def field_1(X, Y):
     u = X**2 - 2*(Y+1)**2 - (X-1)
     v = (X + Y) - 1
     
-    return np.array([u,v])
+    return np.array([u,v], dtype=np.float64)
 
 
 def field_2(X, Y):
     u = 2*(Y+1)**2 + 10*Y*np.sin(5*X)
     v = X*(X+2) + Y**3 - 6 + X + 10*Y*np.cos(X+10*Y)
 
-    return np.array([u,v])
+    return np.array([u,v], dtype=np.float64)
 
 
 def field_3(X, Y):
     u = np.sin(20*X + 3) + (10*Y-1)*np.cos(10*Y) + 10*Y
     v = np.sin(10*Y-0.4) - np.cos(10*Y-10*X) + 10*X
 
-    return np.array([u,v])
+    return np.array([u,v], dtype=np.float64)
 
 
 def field_exp(x, y, d_cell, file):
@@ -51,7 +51,7 @@ def field_exp(x, y, d_cell, file):
     u = interp2d(xp, yp, up)
     v = interp2d(xp, yp, vp)
 
-    return np.array([u(x,y), v(x,y)])
+    return np.array([u(x,y), v(x,y)], dtype=np.float64)
 
 
 def field_5(X,Y):
@@ -72,7 +72,7 @@ def noise(X, sigma=1):
     u = np.random.normal(0, sigma, size)
     v = np.random.normal(0, sigma, size)
 
-    return np.array([u,v])
+    return np.array([u,v], dtype=np.float64)
 
 
 def normalize(u, v, u_max):
@@ -83,4 +83,4 @@ def normalize(u, v, u_max):
     '''
     scale_factor = u_max / np.sqrt(u**2 + v**2).max()
 
-    return np.array([u, v]) * scale_factor
+    return np.array([u, v], dtype=np.float64) * scale_factor
