@@ -19,7 +19,7 @@ def im_velocity(velocity, dir):
         ax[i].imshow(velocity[i], vmin=u_min, vmax=u_max)
         
     fig.tight_layout()
-    fig.savefig(dir + "plots/xy_velocity.png")
+    fig.savefig(dir + "/plots/xy_velocity.png")
 
 
 
@@ -47,30 +47,33 @@ def velocity_field(velocity, init_cond, region, dir):
     im=ax.imshow(init_cond, vmin=I_min, vmax=I_max, cmap="Greys_r", alpha=0.65)
     
     fig.colorbar(im)
-    fig.savefig(dir + "plots/velocity_field.png")
+    fig.savefig(dir + "/plots/velocity_field.png")
 
 
 
-def intensity(intensity, X, t_max, t_steps, region, dir, file):
+def intensity(intensity, t_max, t_steps, region, dir, im_file):
     I_min = np.min(intensity[0])
     I_max = np.max(intensity[0])
+
+    filename = im_file.split('/')[-1]
+    filename = filename.split('.')[0]
 
     for frame in range(t_max+1):
         i = int(frame * t_steps / t_max)
 
         # Plot and save as png
         fig, ax = plt.subplots(1, 1)
-        ax.set(title=f"Frame: {frame:0.0f}", \
-               xlabel=r'$x ~/~ d_{cell}$', \
-               ylabel=r'$y ~/~ d_{cell}$')
-        im=ax.imshow(intensity[i], extent=[X[0,0], X[0,-1], X[-1,0], X[-1,-1]], 
+        ax.set(title=f"Frame: {frame:0.0f}",)# \
+               #xlabel=r'$x ~/~ d_{cell}$', \
+               #ylabel=r'$y ~/~ d_{cell}$')
+        im=ax.imshow(intensity[i], 
                      origin="upper", vmin=I_min, vmax=I_max)
 
 
         ax.plot(region[0], region[1], lw=3, color="k", alpha=1, ls="dashed")
         
         fig.colorbar(im)
-        fig.savefig(dir + file + f"_%00i.png" % (frame), format = "png")
+        fig.savefig(dir + "/plots/" + filename + f"_%00i.png" % (frame), format = "png")
 
 
 
@@ -88,6 +91,6 @@ def mass_conservation(intensity, idx, dt, dir):
     ax.legend()
     
     fig.tight_layout()
-    fig.savefig(dir + "plots/mean_intensity.png")
+    fig.savefig(dir + "/plots/mean_intensity.png")
 
     return fig

@@ -14,7 +14,7 @@ im_file   = sys.argv[1]
 field_dir = sys.argv[2]
 
 # Creating data folder
-tif_dir = field_dir + "tif/"
+tif_dir = field_dir + "/tif/"
 if os.path.isdir(tif_dir) == 0:
     os.mkdir(tif_dir)
 
@@ -27,13 +27,14 @@ u_max  = d_cell / 4     # max displacement in pixels per frame
 # Import initial conditions
 # read tif directly?
 # Padd to ensure initial conditions are well behaved
-f = 1/4                 # Defining subset. change so remove to new exponent of 2
-pad_width = 10
+f = 100
+pad_width = 40
 init_cond = np.load(im_file)
 init_cond = np.pad(init_cond, mode='linear_ramp', end_values=0, pad_width=pad_width)
 
+
 # Import velocity field and normalize to u_max
-u, v = np.loadtxt(field_dir + "x_velocity_full.txt"), np.loadtxt(field_dir + "y_velocity_full.txt")
+u, v = np.loadtxt(field_dir + "/x_velocity_full.txt"), np.loadtxt(field_dir + "/y_velocity_full.txt")
 u, v = normalize(*[u,v], u_max)
 
 # Ensure intensity data and velocity field have same size.
@@ -46,18 +47,19 @@ save.velocity_field(velocity, tif_dir, idx)
 
 ''' GENERATE DATA '''
 # set time parameters
-dt      = 0.1  # in frames
-t_max   = 2    # in frames
+dt      = 0.05  # in frames
+t_max   = 6    # in frames
 t_steps = int(t_max / dt)
 
 intensity = integration.RK(intensity, velocity, t_steps=t_steps, dt=dt)
 save.intensity(intensity, idx, t_max, t_steps, tif_dir, im_file)
+plot.intensity(intensity, t_max, t_steps, region, field_dir, im_file)
 plot.mass_conservation(intensity, idx, dt, field_dir)
 
 
 # SAVE PARAMETERS
 im_size  = np.shape(init_cond)
-tif_size = (int(im_size[0] * (1 - 2*f)), int(im_size[1] * (1 - 2*f)))
+tif_size = (im_size[0] - 2*f, im_size[1] - 2*f)
 
 config = {"im_file"         : im_file,
           "full resolution" : im_size,
