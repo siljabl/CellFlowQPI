@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -10,16 +11,29 @@ import integration
 import plot_functions as plot
 import save_functions as save
 
+parser = argparse.ArgumentParser(description='Evolving input data according to input field')
+parser.add_argument('im_data',   type=str, \
+                    help='Image that is used as initial condition. N.B. should be tif.')
+parser.add_argument('field_dir', type=str, \
+                    help='Directory containing velocity field.')
+parser.add_argument('-n_frames',  type=int, nargs='?', \
+                    help='Number of frames to generate', default=2)
+parser.add_argument('-pad_width',        type=int, nargs='?', \
+                    help='Pad width of image data',      default=20)
+args = parser.parse_args()
+
+
 # Folders
-im_file   = sys.argv[1]
-field_dir = sys.argv[2]
-frames    = sys.argv[3]
+im_file   = args.im_data
+field_dir = args.field_dir
+n_frames  = args.n_frames
+pw        = args.pw
 
 # Creating data folder
 tif_dir = field_dir + "/tif/"
 if os.path.isdir(tif_dir) == 0:
     os.mkdir(tif_dir)
-
+required=False,
 # Experimental parameters
 d_cell = 40             # approximate cell diameter in pixels
 u_max  = d_cell / 4     # max displacement in pixels per frame
@@ -27,12 +41,10 @@ u_max  = d_cell / 4     # max displacement in pixels per frame
 
 ''' IMPORT IMAGE DATA AND VELOCITY FIELD '''
 # Import initial conditions
-# read tif directly?
-# Padd to ensure initial conditions are well behaved
-f = 100
-pad_width = 100
 init_cond = plt.imread(im_file)
-init_cond = np.pad(init_cond, mode='linear_ramp', end_values=0, pad_width=pad_width)
+
+# Pad to ensure initial conditions are well behaved
+init_cond = np.pad(init_cond, mode='linear_ramp', end_values=0, pad_width=pw)
 
 
 # Import velocity field and normalize to u_max
@@ -41,7 +53,7 @@ u, v = normalize(*[u,v], u_max)
 
 # Ensure intensity data and velocity field have same size.
 intensity, velocity = size(init_cond, np.array([u, v]))
-idx, region = sub_region(f, intensity)
+idx, region = sub_region(pw, intensity)
 
 plot.velocity_field(velocity, intensity, region, field_dir)
 save.velocity_field(velocity, tif_dir, idx)
@@ -50,7 +62,7 @@ save.velocity_field(velocity, tif_dir, idx)
 ''' GENERATE DATA '''
 # set time parameters
 dt      = 0.05  # in frames
-t_max   = int(frames)    # in frames
+t_max   = int(n_frames)    # in frames
 t_steps = int(t_max / dt)
 
 intensity = integration.RK(intensity, velocity, t_steps=t_steps, dt=dt)
@@ -61,12 +73,12 @@ plot.mass_conservation(intensity, idx, dt, field_dir)
 
 # SAVE PARAMETERS
 im_size  = np.shape(init_cond)
-tif_size = (im_size[0] - 2*f, im_size[1] - 2*f)
+tif_size = (im_size[0] - 2*pw, im_size[1] - 2*pw)
 
 config = {"im_file"         : im_file,
           "full resolution" : im_size,
           "tif resolution"  : tif_size,
-          "pad_width"       : pad_width,
+          "pad_width"       : pw,
           "d_cell"          : d_cell, 
           "u_max"           : u_max, 
           "dt"              : dt}
