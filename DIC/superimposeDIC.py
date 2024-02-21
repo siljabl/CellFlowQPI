@@ -1,5 +1,13 @@
 #!/usr/bin/python3
 
+"""
+Combriat T. 2024
+This small script input original images and DIC results and output the original images with the DIC 
+results superimposed on top.
+These results are plotted as points, which position is updated according to the DIC fields.
+This is useful to visualize the performances of the DIC.
+
+"""
 
 
 
