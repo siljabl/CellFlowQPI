@@ -1,0 +1,8 @@
+# data folder
+../Data/SyntheticTestData/Test/
+# prename
+Well1-1_resc_reg2_
+# reference frame
+0
+# final moving frame
+2
