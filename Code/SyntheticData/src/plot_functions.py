@@ -30,7 +30,7 @@ def velocity_field(velocity, init_cond, region, dir):
     u_norm = np.sqrt(velocity[0]**2 + velocity[1]**2)
     u_min  = np.min(u_norm)
     u_max  = np.max(u_norm)
-    u_flip = np.flip(velocity, axis=1)
+    u_flip = -np.array([np.flip(velocity[i], axis=0) * (-1)**i for i in range(2)])
 
     x   = np.arange(size[0])
     y   = np.arange(size[1])

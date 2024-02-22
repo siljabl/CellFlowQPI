@@ -9,7 +9,7 @@ import save_functions as save
 
 
 # Folders
-field_dir = sys.argv[1]
+field_dir = "../../Data/SyntheticTestData/" + str(sys.argv[1])
 
 # Creating data folder
 if os.path.isdir(field_dir) == 0:
@@ -19,13 +19,13 @@ if os.path.isdir(field_dir) == 0:
 
 ''' VELOCITY FIELD '''
 # Meshgrid
-size = [1200, 1200]     # Should be larger than image data, which is usually 1024x1024
+size = [1500, 1500]     # Should be larger than image data, which is usually 1024x1024
 x   = np.linspace(-1, 1, size[0]+1)
 y   = np.linspace(-1, 1, size[1]+1)
 X,Y = np.meshgrid(x,y)
 
 # Define velocity field
-velocity = field_2(X, Y)
+velocity = basic_2(X, Y)
 velocity = normalize(*velocity, 1)
 
 save.velocity_field(velocity, field_dir)

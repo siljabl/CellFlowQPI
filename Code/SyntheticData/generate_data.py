@@ -13,13 +13,13 @@ import save_functions as save
 
 parser = argparse.ArgumentParser(description='Evolving input data according to input field')
 parser.add_argument('im_data',   type=str, \
-                    help='Image that is used as initial condition. N.B. should be tif.')
+                    help='image that is used as initial condition. N.B. should be tif.')
 parser.add_argument('field_dir', type=str, \
-                    help='Directory containing velocity field.')
+                    help='directory containing velocity field.')
 parser.add_argument('-n_frames',  type=int, nargs='?', \
-                    help='Number of frames to generate', default=2)
+                    help='number of frames to generate', default=2)
 parser.add_argument('-pad_width',        type=int, nargs='?', \
-                    help='Pad width of image data',      default=20)
+                    help='pad width of image data',      default=100)
 args = parser.parse_args()
 
 
@@ -27,13 +27,13 @@ args = parser.parse_args()
 im_file   = args.im_data
 field_dir = args.field_dir
 n_frames  = args.n_frames
-pw        = args.pw
+pw        = args.pad_width
 
 # Creating data folder
 tif_dir = field_dir + "/tif/"
 if os.path.isdir(tif_dir) == 0:
     os.mkdir(tif_dir)
-required=False,
+
 # Experimental parameters
 d_cell = 40             # approximate cell diameter in pixels
 u_max  = d_cell / 4     # max displacement in pixels per frame
@@ -61,8 +61,8 @@ save.velocity_field(velocity, tif_dir, idx)
 
 ''' GENERATE DATA '''
 # set time parameters
-dt      = 0.05  # in frames
-t_max   = int(n_frames)    # in frames
+dt      = 0.01              # in frames
+t_max   = int(n_frames)     # in frames
 t_steps = int(t_max / dt)
 
 intensity = integration.RK(intensity, velocity, t_steps=t_steps, dt=dt)

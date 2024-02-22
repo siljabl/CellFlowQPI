@@ -10,4 +10,6 @@ Run <code>python generate_data.py {input image} {directory containing velocity f
 ### TO DO:
 - make possible to run outside this directory
 - create virtual environment
-- use argparse instead of sys
+- save config as dict
+- is u, v saved correctly compared to .tif images? (I.e. different origin)
+. improve resolution on RK?

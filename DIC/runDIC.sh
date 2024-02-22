@@ -64,6 +64,6 @@ do
 done
 
 rm -r ../dic/tmp_SzW_$SzW
-mv ../../../../DIC/mm3d-LogFile.txt ../dic/SzW_$SzW-LogFile.txt
+mv mm3d-LogFile.txt ../dic/SzW_$SzW-LogFile.txt
 
 

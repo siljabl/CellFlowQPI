@@ -1,0 +1,40 @@
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_1.tif" "DirMEC=../dic/tmp_SzW_20/1/" "SzW=20" 
+ PID : 7611 ;   [Beginning at ] Wed Feb 21 21:08:02 2024
+ PID : 7611 ;   [Ending correctly at] Wed Feb 21 21:09:03 2024
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_2.tif" "DirMEC=../dic/tmp_SzW_20/2/" "SzW=20" 
+ PID : 7750 ;   [Beginning at ] Wed Feb 21 21:09:03 2024
+ PID : 7750 ;   [Ending correctly at] Wed Feb 21 21:10:15 2024
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_3.tif" "DirMEC=../dic/tmp_SzW_20/3/" "SzW=20" 
+ PID : 7888 ;   [Beginning at ] Wed Feb 21 21:10:15 2024
+ PID : 7888 ;   [Ending correctly at] Wed Feb 21 21:13:24 2024
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_4.tif" "DirMEC=../dic/tmp_SzW_20/4/" "SzW=20" 
+ PID : 8038 ;   [Beginning at ] Wed Feb 21 21:13:24 2024
+ PID : 8038 ;   [Ending correctly at] Wed Feb 21 21:20:53 2024
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_5.tif" "DirMEC=../dic/tmp_SzW_20/5/" "SzW=20" 
+ PID : 8204 ;   [Beginning at ] Wed Feb 21 21:20:53 2024
+ PID : 8204 ;   [Ending correctly at] Wed Feb 21 21:25:10 2024
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_6.tif" "DirMEC=../dic/tmp_SzW_20/6/" "SzW=20" 
+ PID : 8351 ;   [Beginning at ] Wed Feb 21 21:25:10 2024
+ PID : 8351 ;   [Ending correctly at] Wed Feb 21 22:07:00 2024
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_7.tif" "DirMEC=../dic/tmp_SzW_20/7/" "SzW=20" 
+ PID : 8740 ;   [Beginning at ] Wed Feb 21 22:07:00 2024
+ PID : 8740 ;   [Ending correctly at] Wed Feb 21 22:11:35 2024
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_8.tif" "DirMEC=../dic/tmp_SzW_20/8/" "SzW=20" 
+ PID : 8893 ;   [Beginning at ] Wed Feb 21 22:11:35 2024
+ PID : 8893 ;   [Ending correctly at] Wed Feb 21 22:19:23 2024
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_9.tif" "DirMEC=../dic/tmp_SzW_20/9/" "SzW=20" 
+ PID : 9126 ;   [Beginning at ] Wed Feb 21 22:19:23 2024
+ PID : 9126 ;   [Ending correctly at] Wed Feb 21 22:25:25 2024
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_10.tif" "DirMEC=../dic/tmp_SzW_20/10/" "SzW=20" 
+ PID : 9284 ;   [Beginning at ] Wed Feb 21 22:25:25 2024
+ PID : 9284 ;   [Ending correctly at] Wed Feb 21 22:31:01 2024
