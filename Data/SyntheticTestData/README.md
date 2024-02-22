@@ -4,6 +4,6 @@ Generated with `generate_data.py` and `generate_field.py` in /CellFlowQPI/Code/S
 Each folder contains:
 - config.txt: configuration file
 - _velocity_full.txt: full velocity field used to generate .tif files. This field covers a larger area than the final frames.
-- /tif
-- /plots
-- /dic (remove this?)
+- /tif: folder containing test frames and corresponding velocity field
+- /plots: folder containing plots of full data (including padding region), velocity field and intensity conservation
+- /dic (remove this?): folder containing results from DIC
