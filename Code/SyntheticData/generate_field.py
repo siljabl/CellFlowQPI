@@ -7,9 +7,9 @@ from velocity_fields import *
 import plot_functions as plot
 import save_functions as save
 
-
 # Folders
-field_dir = "../../Data/SyntheticTestData/" + str(sys.argv[1])
+func = curl
+field_dir = "../../Data/SyntheticTestData/" + func.__name__
 
 # Creating data folder
 if os.path.isdir(field_dir) == 0:
@@ -25,7 +25,7 @@ y   = np.linspace(-1, 1, size[1]+1)
 X,Y = np.meshgrid(x,y)
 
 # Define velocity field
-velocity = basic_2(X, Y)
+velocity = func(X, Y)
 velocity = normalize(*velocity, 1)
 
 save.velocity_field(velocity, field_dir)

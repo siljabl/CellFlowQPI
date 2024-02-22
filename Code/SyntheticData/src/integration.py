@@ -1,5 +1,5 @@
 import numpy as np
-
+from tqdm import tqdm
 
 def dI_dt(I, u):
     '''
@@ -38,7 +38,7 @@ def Euler(init, u, t_steps, dt=0.1):
     intensity    = np.zeros([t_steps + 1, *size])
     intensity[0] = init
 
-    for t in range(t_steps):
+    for t in tqdm(range(t_steps)):
         intensity[t+1] = intensity[t] + dI_dt(intensity[t], u) * dt
 
     return intensity
@@ -59,7 +59,7 @@ def RK(init, u, t_steps, dt=0.1):
     intensity    = np.zeros([t_steps + 1, *size])
     intensity[0] = init
 
-    for t in range(t_steps):
+    for t in tqdm(range(t_steps)):
         k1 = dI_dt(intensity[t], u)
         k2 = dI_dt(intensity[t] + (dt/2)*k1, u)
         k3 = dI_dt(intensity[t] + (dt/2)*k2, u)

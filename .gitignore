@@ -1,9 +1,11 @@
 # Silja
-image_analysis.py
 Data/RescaledRegistered
 Data/RescaledRegisteredSmoothed
 Data/SyntheticTestData/Test
+Data/SyntheticTestData/*/dic
+DIC/Silja
+
+image_analysis.py
 images
 .vscode
-*/dic
-DIC/Silja
+

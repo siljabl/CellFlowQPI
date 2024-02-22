@@ -1,0 +1,11 @@
+Units
+lenght:pixels
+time:frames
+
+im_file:../../Data/InitialConditions/Well1-1_resc_reg2.tif
+full resolution:(1224, 1224)
+tif resolution:(1024, 1024)
+pad_width:100
+d_cell:40
+u_max:10.0
+dt:0.01

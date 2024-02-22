@@ -35,14 +35,14 @@ def cell_expansion(X, Y, loc=[0,0]):
     return np.array([u,v], dtype=np.float64)
 
 
-def basic_1(X, Y):
+def uniform(X, Y):
     u = np.ones_like(X)
     v = np.zeros_like(Y)
 
     return np.array([u,v], dtype=np.float64)
 
 
-def basic_2(X, Y):
+def curl(X, Y):
     u =  Y #* np.sign(X**2 + Y**2 - X.max()/3)
     v = -X #* np.sign(X**2 + Y**2 - X.max()/3)
 
