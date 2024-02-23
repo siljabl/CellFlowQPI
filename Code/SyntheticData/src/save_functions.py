@@ -56,6 +56,7 @@ def intensity(intensity, idx, t_max, t_steps, tif_dir, im_file):
         I = intensity[i, xlim[0]:xlim[1], ylim[0]:ylim[1]]
 
         # Save frame as tif
+        I[I < 0] = 0    # avoid negative overflows
         I_tif  = I.astype(np.uint8)
         im_tif = Image.fromarray(I_tif)
         im_tif.save(tif_dir + filename + f"_%00i.tif" % (frame))

@@ -1,5 +1,5 @@
 # data folder
-../Data/SyntheticTestData/Basic2/
+../Data/SyntheticTestData/uniform/
 # prename
 Well1-1_resc_reg2_
 # reference frame

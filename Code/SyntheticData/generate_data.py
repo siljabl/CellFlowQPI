@@ -19,7 +19,7 @@ parser.add_argument('field_dir', type=str, \
 parser.add_argument('-n_frames',  type=int, nargs='?', \
                     help='number of frames to generate', default=2)
 parser.add_argument('-pad_width',        type=int, nargs='?', \
-                    help='pad width of image data',      default=100)
+                    help='pad width of image data',      default=60)
 args = parser.parse_args()
 
 
@@ -53,7 +53,7 @@ u, v = normalize(*[u,v], u_max)
 
 # Ensure intensity data and velocity field have same size.
 intensity, velocity = size(init_cond, np.array([u, v]))
-idx, region = sub_region(pw, intensity)
+idx, region = sub_region(3*pw, intensity)
 
 plot.velocity_field(velocity, intensity, region, field_dir)
 save.velocity_field(velocity, tif_dir, idx)
