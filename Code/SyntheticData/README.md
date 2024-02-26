@@ -12,4 +12,5 @@ Run <code>python generate_data.py {input image} {directory containing velocity f
 - create virtual environment
 - save config as dict
 - is u, v saved correctly compared to .tif images? (I.e. different origin)
-. improve resolution on RK?
+- improve resolution on RK?
+- remove normalization of velocity field? Since normalizing in generate_data.py, full velocity field and tif velocity is not equal...
