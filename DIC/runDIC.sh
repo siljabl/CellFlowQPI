@@ -31,6 +31,7 @@ run_MAX=5
 # Change and create dictionaries
 cd $folder
 mkdir -p dic
+mkdir -p dic/plots
 mkdir -p dic/tmp_SzW_$SzW
 mkdir -p dic/x_displacement_SzW_$SzW
 mkdir -p dic/y_displacement_SzW_$SzW
