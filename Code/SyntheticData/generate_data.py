@@ -23,7 +23,7 @@ parser.add_argument('-pad_width',        type=int, nargs='?', \
 args = parser.parse_args()
 
 
-# Folders
+# Input arguments
 im_file   = args.im_data
 field_dir = args.field_dir
 n_frames  = args.n_frames
