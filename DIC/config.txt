@@ -1,5 +1,5 @@
 # data folder
-../Data/SyntheticTestData/curl/
+../Data/SyntheticTestData/field_2/
 # prename
 Well1-1_resc_reg2_
 # reference frame
