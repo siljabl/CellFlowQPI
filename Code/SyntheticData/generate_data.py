@@ -49,7 +49,8 @@ init_cond = np.pad(init_cond, mode='linear_ramp', end_values=0, pad_width=pw)
 
 # Import velocity field and normalize to u_max
 u, v = np.loadtxt(field_dir + "/x_velocity_full.txt"), np.loadtxt(field_dir + "/y_velocity_full.txt")
-u, v = normalize(*[u,v], u_max)
+if np.max(u) > u_max or np.max(v) > u_max:
+    u, v = normalize(*[u,v], u_max)
 
 # Ensure intensity data and velocity field have same size.
 intensity, velocity = size(init_cond, np.array([u, v]))
