@@ -31,8 +31,8 @@ def velocity_field(velocity, dir, idx=[[0,-1], [0,-1]]):
         np.savetxt(dir + "/y_velocity_full.txt", v)
 
     else:
-        np.savetxt(dir + "/x_velocity_tif.txt", u)
-        np.savetxt(dir + "/y_velocity_tif.txt", v)
+        np.savetxt(dir + "x_velocity_tif.txt", u)
+        np.savetxt(dir + "y_velocity_tif.txt", v)
 
 
 

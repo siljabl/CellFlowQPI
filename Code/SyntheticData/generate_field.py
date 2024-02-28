@@ -9,12 +9,12 @@ import save_functions as save
 
 # Folders
 func = field_2
-field_dir = "../../Data/SyntheticTestData/" + func.__name__
+field_dir = "../../Data/SyntheticTestData/" + func.__name__ + "/"
 
 # Creating data folder
 if os.path.isdir(field_dir) == 0:
     os.mkdir(field_dir)
-    os.mkdir(field_dir + "/plots/")
+    os.mkdir(field_dir + "plots/")
 
 
 ''' VELOCITY FIELD '''
