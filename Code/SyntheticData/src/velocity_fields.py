@@ -34,6 +34,12 @@ def cell_expansion(X, Y, loc=[0,0]):
 
     return np.array([u,v], dtype=np.float64)
 
+def none(X, Y):
+    u = np.zeros_like(X)
+    v = np.zeros_like(Y)
+
+    return np.array([u,v], dtype=np.float64)
+
 
 def uniform(X, Y):
     u = np.ones_like(X)
@@ -45,6 +51,13 @@ def uniform(X, Y):
 def curl(X, Y):
     u =  Y #* np.sign(X**2 + Y**2 - X.max()/3)
     v = -X #* np.sign(X**2 + Y**2 - X.max()/3)
+
+    return np.array([u,v], dtype=np.float64)
+
+
+def divergence(X, Y):
+    u = X #* np.sign(X**2 + Y**2 - X.max()/3)
+    v = Y #* np.sign(X**2 + Y**2 - X.max()/3)
 
     return np.array([u,v], dtype=np.float64)
 
@@ -61,15 +74,6 @@ def field_1(X, Y):
 def field_2(X, Y):
     u = np.sin(20*X + 3) + (10*Y-1)*np.cos(10*Y) + 10*Y
     v = np.sin(10*Y-0.4) - np.cos(10*Y-10*X) + 10*X
-
-    return np.array([u,v], dtype=np.float64)
-
-
-
-def noise(X, sigma=1):
-    size = np.shape(X)
-    u = np.random.normal(0, sigma, size)
-    v = np.random.normal(0, sigma, size)
 
     return np.array([u,v], dtype=np.float64)
 

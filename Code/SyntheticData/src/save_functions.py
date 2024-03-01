@@ -8,7 +8,7 @@ def config(config, dir):
     dir: where config is saved
     '''
     with open(dir + "/config.txt", 'w') as f: 
-        f.write('Units\nlenght:pixels\ntime:frames\n\n') 
+        #f.write('Units\nlenght:pixels\ntime:frames\n\n') 
 
         for key, value in config.items():  
             f.write('%s:%s\n' % (key, value))

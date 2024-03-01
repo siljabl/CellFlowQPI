@@ -1,4 +1,5 @@
 import numpy as np
+import scipy as sc
 from tqdm import tqdm
 
 def dI_dt(I, u):
@@ -65,6 +66,7 @@ def RK(init, u, t_steps, dt=0.1):
         k3 = dI_dt(intensity[t] + (dt/2)*k2, u)
         k4 = dI_dt(intensity[t] +   dt * k3, u)
 
+        # evolve intensities
         intensity[t+1] = intensity[t] + (k1 + 2*k2 + 2*k3 + k4) * dt / 6
 
     return intensity

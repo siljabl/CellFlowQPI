@@ -1,4 +1,5 @@
 import numpy as np
+import scipy as sc
 
 
 def size(im, u):
@@ -37,3 +38,17 @@ def sub_region(f, im):
     y_reg = [idx[1][0], idx[1][0], idx[1][1], idx[1][1], idx[1][0]]
 
     return idx, [x_reg, y_reg]
+
+
+
+
+def noise(intensity):
+    size = np.shape(intensity)
+    norm_dist = np.random.normal(0, 1, size)
+    noise = 2**8 * norm_dist / np.max(norm_dist)
+
+    return noise.astype(int)
+
+
+def smoothen(data, sigma=2):
+    return sc.ndimage.gaussian_filter(data, sigma=sigma)

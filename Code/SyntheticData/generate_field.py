@@ -8,7 +8,7 @@ import plot_functions as plot
 import save_functions as save
 
 # Folders
-func = field_2
+func = uniform
 field_dir = "../../Data/SyntheticTestData/" + func.__name__ + "/"
 
 # Creating data folder
@@ -26,7 +26,8 @@ X,Y = np.meshgrid(x,y)
 
 # Define velocity field
 velocity = func(X, Y)
-velocity = normalize(*velocity, 1)
+if np.sum(velocity) != 0:
+    velocity = normalize(*velocity, 1)
 
 save.velocity_field(velocity, field_dir)
 plot.im_velocity(velocity, field_dir)

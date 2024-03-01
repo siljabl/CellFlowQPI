@@ -2,6 +2,7 @@ import os
 import sys
 import argparse
 import numpy as np
+from datetime import datetime
 import matplotlib.pyplot as plt
 
 sys.path.append("src")
@@ -60,8 +61,9 @@ init_cond = np.pad(init_cond, mode='linear_ramp', end_values=0, pad_width=pw)
 
 # Import velocity field and normalize to u_max
 u, v = np.loadtxt(field_dir + "/x_velocity_full.txt"), np.loadtxt(field_dir + "/y_velocity_full.txt")
-#if np.max(u) > u_max or np.max(v) > u_max:
-u, v = normalize(*[u,v], u_max)
+
+if np.sum(u+v) != 0:
+    u, v = normalize(*[u,v], u_max)
 
 # Ensure intensity data and velocity field have same size.
 intensity, velocity = size(init_cond, np.array([u, v]))
@@ -78,6 +80,9 @@ t_max   = int(n_frames)     # in frames
 t_steps = int(t_max / dt)
 
 intensity = integration.RK(intensity, velocity, t_steps=t_steps, dt=dt)
+#intensity += 0.1*noise(intensity)
+intensity = smoothen(intensity)
+
 save.intensity(intensity, idx, t_max, t_steps, tif_dir, im_file)
 plot.intensity(intensity, t_max, t_steps, region, umax_dir, im_file)
 plot.mass_conservation(intensity, idx, dt, umax_dir)
@@ -87,7 +92,8 @@ plot.mass_conservation(intensity, idx, dt, umax_dir)
 im_size  = np.shape(init_cond)
 tif_size = (im_size[0] - 2*pw, im_size[1] - 2*pw)
 
-config = {"im_file"         : im_file,
+config = {"date"            : datetime.today().strftime('%Y-%m-%d'), 
+          "im_file"         : im_file,
           "full resolution" : im_size,
           "tif resolution"  : tif_size,
           "pad_width"       : pw,
