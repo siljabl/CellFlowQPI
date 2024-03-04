@@ -19,7 +19,7 @@ def im_velocity(velocity, dir):
         fig.colorbar(im, ax=ax[i]) # not sure this works
         
     fig.tight_layout()
-    fig.savefig(dir + "xy_velocity.png")
+    fig.savefig(dir + "plots/xy_velocity.png")
 
 
 
