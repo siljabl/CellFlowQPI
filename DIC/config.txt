@@ -1,8 +1,8 @@
 # data folder
-../Data/SyntheticTestData/field_2/
+../Data/SyntheticTestData/field_2/u_max_16
 # prename
 Well1-1_resc_reg2_
 # reference frame
 0
 # final moving frame
-10
+1

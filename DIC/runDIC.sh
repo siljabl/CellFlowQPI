@@ -4,7 +4,7 @@
 # Size of DIC-box (number of neighbors on each side)
 if [ $# -eq 0 ]
     then
-    read -p "Enter SzW (number of neighbors on each side) : " SzW
+    read -p "Enter SzW (number of neighbors on each side) : "mm SzW
 else
     SzW=$1
 fi
