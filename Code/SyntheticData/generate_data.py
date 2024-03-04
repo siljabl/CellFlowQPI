@@ -38,7 +38,7 @@ d_cell = 40             # approximate cell diameter in pixels
 
 
 # Creating data folder
-umax_dir = field_dir + f"u_max_{str(u_max)}/"
+umax_dir = field_dir + f"umax_{str(u_max)}/"
 if os.path.isdir(umax_dir) == 0:
     os.mkdir(umax_dir)
 
