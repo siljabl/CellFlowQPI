@@ -9,14 +9,14 @@ def im_velocity(velocity, dir):
 
     title = [r'$u_x$', r'$u_y$']
 
-    fig, ax = plt.subplots(1,2, figsize=(8,5), sharey=True)
+    fig, ax = plt.subplots(1,2, figsize=(8,3.5), sharey=True)
     for i in range(2):
         ax[i].set(title=title[i])
                   #xlabel=r'$x ~[pixels]$', \
                   #ylabel=r'$y ~[pixels]$')
         
         im = ax[i].imshow(velocity[i])#, vmin=u_min, vmax=u_max)
-        fig.colorbar(im, ax[i]) # not sure this works
+        fig.colorbar(im, ax=ax[i]) # not sure this works
         
     fig.tight_layout()
     fig.savefig(dir + "xy_velocity.png")

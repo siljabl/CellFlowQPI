@@ -8,7 +8,7 @@ import plot_functions as plot
 import save_functions as save
 
 # Folders
-func = uniform
+func = field_1
 field_dir = "../../Data/SyntheticTestData/" + func.__name__ + "/"
 
 # Creating data folder
