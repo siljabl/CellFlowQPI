@@ -20,7 +20,7 @@ parser.add_argument('field_dir', type=str, \
 parser.add_argument('-n_frames',  type=int, nargs='?', \
                     help='number of frames to generate', default=2)
 parser.add_argument('-u_max',     type=int, nargs='?', \
-                    help='upper limit on velocity', default=4)
+                    help='upper limit on velocity',      default=4)
 parser.add_argument('-pad_width', type=int, nargs='?', \
                     help='pad width of image data',      default=60)
 args = parser.parse_args()
@@ -80,7 +80,7 @@ t_max   = int(n_frames)     # in frames
 t_steps = int(t_max / dt)
 
 intensity = integration.RK(intensity, velocity, t_steps=t_steps, dt=dt)
-#intensity += 0.1*noise(intensity)
+intensity += 0.1*noise(intensity)
 intensity = smoothen(intensity)
 
 save.intensity(intensity, idx, t_max, t_steps, tif_dir, im_file)
