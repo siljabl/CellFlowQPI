@@ -1,7 +1,7 @@
 #!/bin/bash
 
 fields=( none uniform curl field_1 field_2 )
-umax=( 4 )
+umax=( 1 2 4 6 8 12 16 20 )
 SzW=( 1 2 5 10 20 50 )
 
 for field in "${fields[@]}"; do

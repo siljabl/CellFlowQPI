@@ -1,5 +1,5 @@
 # data folder
-../Data/SyntheticTestData/field_2/u_max_16
+../Data/SyntheticTestData/field_2/umax_20
 # prename
 Well1-1_resc_reg2_
 # reference frame

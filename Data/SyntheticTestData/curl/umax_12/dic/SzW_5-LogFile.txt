@@ -1,0 +1,4 @@
+=================================================================
+"mm3d" "MM2DPosSism" "Well1-1_resc_reg2_0.tif" "Well1-1_resc_reg2_1.tif" "DirMEC=../dic/tmp_SzW_5/1/" "SzW=5" 
+ PID : 54084 ;   [Beginning at ] Mon Mar  4 18:02:20 2024
+ PID : 54084 ;   [Ending correctly at] Mon Mar  4 18:02:57 2024
