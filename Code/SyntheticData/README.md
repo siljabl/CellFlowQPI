@@ -13,3 +13,4 @@ Run <code>python generate_data.py {input image} {directory containing velocity f
 - save config as dict
 - improve resolution on RK?
 - remove normalization of velocity field? Since normalizing in generate_data.py, full velocity field and tif velocity is not equal...
+- nb. tif_size not correct

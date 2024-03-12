@@ -19,7 +19,7 @@ if os.path.isdir(save_path) == 0:
 
 # take all folders in folder
 SzW  = np.array([1, 2, 5, 10, 20, 50])
-umax = np.array([1, 2, 4, 6, 8, 12, 16])
+umax = np.array([1, 2, 4, 6, 8, 12, 16, 20, 40, 80])
 df = 1
 
 # empty arrays for computations
@@ -81,7 +81,7 @@ s_cmap = mpl.cm.viridis
 u_colors = [u_cmap(i/len(umax)) for i in range(len(umax))];
 s_colors = [s_cmap(i/len(SzW))  for i in range(len(SzW))];
 
-u_plot = [0, 2, 3, 4]
+u_plot = [0, 2, 4, 6]
 s_plot = [0, 2, 3, 4]
 
 for title, mean, true_mean, err, name in zip(titles, means, true_means, errors, names):

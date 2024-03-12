@@ -88,7 +88,7 @@ plot.mass_conservation(intensity, idx, dt, umax_dir)
 
 # SAVE PARAMETERS
 im_size  = np.shape(init_cond)
-tif_size = (im_size[0] - 2*pw, im_size[1] - 2*pw)
+tif_size = (im_size[0] - 3*pw, im_size[1] - 3*pw)
 
 config = {"date"            : datetime.today().strftime('%Y-%m-%d'), 
           "im_file"         : im_file,

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-fields=( none uniform curl field_1 field_2 )
-umax=( 1 2 6 8 12 16 20 )
+fields=( uniform curl field_1 field_2 )
+umax=( 40 80 )
 n_frames=2
 pad_width=60
 
